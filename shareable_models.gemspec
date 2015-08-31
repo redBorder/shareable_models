@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
                   'users share. We help you to do it easily.'
   s.authors     = ['Angel M Miguel']
   s.email       = 'angelmm@redborder.net'
-  s.files       = Dir['{app,lib}/**/*'] + %w(LICENSE README.md)
+  s.files       = Dir['{app,lib}/**/*'] + %w(LICENSE README.md Rakefile)
   s.homepage    = 'http://redborder.net'
   s.test_files = Dir['spec/**/*']
   s.require_paths = ['lib']
