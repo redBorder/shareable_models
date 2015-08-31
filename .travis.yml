@@ -12,4 +12,5 @@ gemfile:
 matrix:
   allow_failures:
     - gemfile: gemfiles/rails_master.gemfile
+before_script: rake db:migrate
 script: bundle exec rspec
