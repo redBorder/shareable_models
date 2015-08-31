@@ -1,0 +1,8 @@
+#
+# Fixtures for share models
+#
+angel_to_jose:
+  resource: angel_resource (Resource)
+  shared_to: jose (User)
+  shared_from: angel (User)
+  edit: false

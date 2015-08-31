@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.email       = 'angelmm@redborder.net'
   s.files       = Dir['{app,lib}/**/*'] + %w(LICENSE README.md)
   s.homepage    = 'http://redborder.net'
+  s.test_files = Dir['spec/**/*']
   s.require_paths = ['lib']
   s.licenses     = ['AGPL']
   # Main dependencies
@@ -18,4 +19,5 @@ Gem::Specification.new do |s|
   # Dependencies for testing
   s.add_development_dependency 'rspec', '>= 3.2'
   s.add_development_dependency 'rspec-rails', '>= 3.2'
+  s.add_development_dependency 'sqlite3'
 end

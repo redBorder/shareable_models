@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'rails', '~> 4.2.2'
+group :development, :test do
+  gem 'rails', '~> 4.2.2'
+  gem 'pry'
+  gem 'pry-nav'
+end

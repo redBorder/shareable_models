@@ -1,0 +1,14 @@
+#
+# Fixtures for resources
+#
+angel_resource:
+  name: Angel's resource
+  user: angel
+
+jose_resource:
+  name: Jose's resource
+  user: jose
+
+clara_resource:
+  name: Clara's resource
+  user: clara

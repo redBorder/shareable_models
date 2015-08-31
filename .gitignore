@@ -6,3 +6,8 @@
 
 # Gemfile
 Gemfile.lock
+
+# Tmp of dummy app
+spec/dummy/tmp
+spec/dummy/log
+spec/dummy/db/*.sqlite3

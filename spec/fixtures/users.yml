@@ -1,0 +1,11 @@
+#
+# Fixture with users
+#
+angel:
+  name: Angel
+
+jose:
+  name: Jose
+
+clara:
+  name: Clara
