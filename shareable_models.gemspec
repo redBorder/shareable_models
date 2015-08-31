@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.licenses     = ['AGPL']
   # Main dependencies
-  s.add_dependency 'activerecord', '>= 3.2.0'
-  s.add_dependency 'railties', '>= 3.2.0'
+  s.add_dependency 'activerecord', '>= 4.0.0'
+  s.add_dependency 'railties', '>= 4.0.0'
   # Dependencies for testing
   s.add_development_dependency 'rspec', '>= 3.2'
   s.add_development_dependency 'rspec-rails', '>= 3.2'
