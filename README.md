@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/shareable_models.svg)](http://badge.fury.io/rb/shareable_models) [![Build Status](https://travis-ci.org/redBorder/shareable_models.svg?branch=master)](https://travis-ci.org/redBorder/shareable_models)
+
 # Shareable Models
 
 Shareable models is a gem to share models between models. Is this strange? I will explain the functionality of this Gem with an example.
