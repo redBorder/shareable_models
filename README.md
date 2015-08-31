@@ -60,7 +60,7 @@ Set a model as sharer. A sharer can share and receive resources. It has edit per
 * It creates the resource (see [Shareable](#shareable))
 * Another sharer shares the resource with him and edit permission is true.
 
-Importants methods defined by sharer (see sharer.rb for full documentation):
+Importants methods defined by sharer (see [sharer.rb](https://github.com/redBorder/shareable_models/blob/master/lib/shareable_models/models/sharer.rb) for full documentation):
 
 * `share(resource, to, edit)`: share a resource with another model (to). You can set edit permissions (false by default).
 * `share_with_me(resource, from, edit)`: share a resource **from** another sharer to me. 
@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
 end
 ```
 
-Shareable models can be shared between sharers. Importants methods defined by sharer (see sharer.rb for full documentation):
+Shareable models can be shared between sharers. Importants methods defined by sharer (see [shareable.rb](https://github.com/redBorder/shareable_models/blob/master/lib/shareable_models/models/shareable.rb) for full documentation):
 
 * `share_it(from, to, edit)`: share the resource with **from** a model **to** another. You can set edit permissions (false by default).
 * `editable_by?(from)`: check if resource is editable by given model.
