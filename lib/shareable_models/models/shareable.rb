@@ -52,7 +52,7 @@ module ShareableModels
         return false unless editable_by?(from)
         # Store new share of this element
         shared_with.build(
-          sharer: from,
+          shared_from: from,
           shared_to: to,
           edit: edit
         )

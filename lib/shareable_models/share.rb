@@ -43,7 +43,7 @@ module ShareableModels
       include ShareableModels::Models::Sharer
 
       # Add some relations
-      has_many :shared_resources, as: :sharer, class_name: 'ShareModel'
+      has_many :shared_resources, as: :shared_from, class_name: 'ShareModel'
       has_many :shared_with_me, as: :shared_to, class_name: 'ShareModel'
     end
   end

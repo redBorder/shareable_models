@@ -137,8 +137,8 @@ module ShareableModels
       end
 
       #
-      # Prevent a sharer to edit the resource. First parameter is to set same format
-      # of allow_edit.
+      # Prevent a sharer to edit the resource. First parameter is to set same
+      # format of allow_edit.
       #
       # == Parameters:
       # resource::
