@@ -64,17 +64,29 @@ Importants methods defined by sharer (see sharer.rb for full documentation):
 * `share_with_me(resource, from, edit)`: share a resource **from** another sharer to me. 
 * `can_edit?(resource)`: check if a model can edit a resource.
 * `can_read?(resource)`: check if a model can read a resource.
+* `throw_out(resource, sharer)`: throw out a sharer from a resource.
+* `leave(resource)`: to leave resource. A creator/owner of a shareable resource can't leave it.
 * `allow_edit?(resource, to)`: allow a model to edit a resource. If resource was never shared with model, a new relation is created.
 * `prevent_edit?(resource, to)`: disable an user to edit a resource. If resource was never shared with model, relation won't be created.
 
 ## Shareable
-Set a model as shareable. Shareable models can be shared between sharers. Importants methods defined by sharer (see sharer.rb for full documentation):
+Set a model as shareable. You need to specify what's the name of the relation to find 'owner' or 'creator' of this shareable model:
+```ruby
+class User < ActiveRecord::Base
+  shareable owner: :user
+  # ...
+end
+```
+
+Shareable models can be shared between sharers. Importants methods defined by sharer (see sharer.rb for full documentation):
 
 * `share_it(from, to, edit)`: share the resource with **from** a model **to** another. You can set edit permissions (false by default).
 * `editable_by?(from)`: check if resource is editable by given model.
 * `readable_by?(from)`: check if resource is readable by given model.
-* `allow_edit?(from, to)`: a model (**from**) allow another (**to**) to edit a resource. If resource was never shared with model, a new relation is created.
-* `prevent_edit?(from, to)`: a model (**from**) disable another (**to**) to edit a resource. If resource was never shared with model, relation won't be created.
+* `throw_out(from, to)`: a sharer (**from**) throw out another (**to**) from a resource.
+* `leave(sharer)`: sharer leaves resource. A creator/owner of a shareable resource can't leave it.
+* `allow_edit?(from, to)`: a sharer (**from**) allow another (**to**) to edit a resource. If resource was never shared with model, a new relation is created.
+* `prevent_edit?(from, to)`: a sharer (**from**) disable another (**to**) to edit a resource. If resource was never shared with model, relation won't be created.
 
 # Example of usage
 

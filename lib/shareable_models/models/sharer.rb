@@ -76,12 +76,52 @@ module ShareableModels
       end
 
       #
+      # Stop sharing a shareable model with a sharer. You can throw out creator
+      # of shareable model.
+      #
+      # == Parameters:
+      # resource::
+      #   Resource to throw out the sharer.
+      # sharer::
+      #   Sharer model to disable share.
+      # edit::
+      #   Check if sharer has permissions to edit before throw out. It's true
+      #   by default, but if an user try to leave a resource we must not check
+      #   this.
+      #
+      # == Returns:
+      # True if it's ok
+      #
+      def throw_out(resource, sharer, edit = true)
+        check_resource(resource)
+        check_sharer(sharer)
+        return false if (edit && !self.can_edit?(resource)) ||
+                        resource.shareable_owner == sharer
+        relation = resource.shared_with.find_by(shared_to: sharer)
+        relation.nil? ? true : relation.destroy.destroyed?
+      end
+
+      #
+      # Current sharer leaves a shareable object.
+      #
+      # == Parameters:
+      # resource::
+      #   Resource to throw out the sharer.
+      #
+      # == Returns:
+      # True if it's ok
+      #
+      def leave(resource)
+        throw_out(resource, self, false)
+      end
+
+      #
       # Permissions
       # ----------------------------------------------------
 
       #
-      # Check if the current sharer can edit a given resource. We need to check if
-      # the user share this element or someone share it with him.
+      # Check if the current sharer can edit a given resource. We need to check
+      # if the user share this element or someone share it with him.
       #
       # == Parameters:
       # resource::

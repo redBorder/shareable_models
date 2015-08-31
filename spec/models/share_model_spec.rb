@@ -7,6 +7,7 @@ describe ShareModel do
       @resource = resources(:angel_resource)
       @angel = users(:angel)
       @clara = users(:clara)
+      @jose = users(:jose)
     end
 
     it 'has read and edit permissions' do
@@ -72,9 +73,24 @@ describe ShareModel do
       @resource.prevent_edit(@angel, @clara)
       expect(@resource.editable_by?(@clara)).to be false
     end
+
+    it 'can not leave the resource he was created' do
+      expect(@angel.leave(@resource)).to be false
+      expect(@resource.leave_by(@angel)).to be false
+    end
+
+    it 'can throw out Jose from resource' do
+      expect(@angel.throw_out(@resource, @jose)).to be true
+      expect(@resource.shared_with).not_to include(@jose)
+    end
+
+    it 'can throw out Jose from resource (from shareable)' do
+      expect(@resource.throw_out(@angel, @jose)).to be true
+      expect(@resource.shared_with).not_to include(@jose)
+    end
   end
 
-  context "Jose has'nt got edit permissions on Angel's resource" do
+  context "Jose hasn't got edit permissions on Angel's resource" do
     before(:each) do
       @resource = resources(:angel_resource)
       @angel = users(:angel)
@@ -102,6 +118,31 @@ describe ShareModel do
     it 'fail when try to allow himself to edit' do
       expect(@resource.allow_edit(@jose, @jose)).to be false
       expect(@jose.allow_edit(@resource, @jose)).to be false
+    end
+
+    it 'can leave the resource' do
+      expect(@jose.leave(@resource)).to be true
+      expect(@resource.shared_with).not_to include(@jose)
+    end
+
+    it 'can leave the resource (from shareable)' do
+      expect(@resource.leave_by(@jose)).to be true
+      expect(@resource.shared_with).not_to include(@jose)
+    end
+  end
+
+  context 'Anyone shared a resource with clara' do
+    before(:each) do
+      @resource = resources(:angel_resource)
+      @clara = users(:clara)
+    end
+
+    it 'try to leave the resource' do
+      expect(@clara.leave(@resource)).to be true
+    end
+
+    it 'try to leave the resource (from shareable)' do
+      expect(@resource.leave_by(@clara)).to be true
     end
   end
 end

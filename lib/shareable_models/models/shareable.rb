@@ -47,17 +47,37 @@ module ShareableModels
       # true if its saved.
       #
       def share_it(from, to, edit = false)
-        check_sharer(from)
-        check_sharer(to)
-        return false unless editable_by?(from)
-        # Store new share of this element
-        shared_with.build(
-          shared_from: from,
-          shared_to: to,
-          edit: edit
-        )
-        # Save current model and new shareResource model
-        save!
+        from.share(self, to, edit)
+      end
+
+      #
+      # Throw out an user from this resource
+      #
+      # == Parameters:
+      # from::
+      #   Sharer that want to leave resource.
+      # to::
+      #   Sharer that want to leave resource.
+      #
+      # == Returns:
+      # True if it's ok
+      #
+      def throw_out(from, to)
+        from.throw_out(self, to)
+      end
+
+      #
+      # Allow given sharer to leave the resource
+      #
+      # == Parameters:
+      # sharer::
+      #   Sharer that want to leave resource.
+      #
+      # == Returns:
+      # True if it's ok
+      #
+      def leave_by(sharer)
+        sharer.leave(self)
       end
 
       #
@@ -75,11 +95,7 @@ module ShareableModels
       # true if the sharer can edit it
       #
       def editable_by?(from)
-        check_sharer(from)
-        # Check if the user creates the resource
-        return true if shareable_owner.present? && shareable_owner == from
-        # Check if this user is assigned to shared_to and edit is true
-        shared_with.exists?(shared_to: from, edit: true)
+        from.can_edit?(self)
       end
 
       #
@@ -93,10 +109,7 @@ module ShareableModels
       # true if the sharer can see it
       #
       def readable_by?(from)
-        check_sharer(from)
-        return true if shareable_owner.present? && shareable_owner == from
-        share_resource = shared_with.where(shared_to: from)
-        share_resource.empty? ? false : true
+        from.can_read?(self)
       end
 
       #
@@ -112,14 +125,7 @@ module ShareableModels
       # True if it's ok
       #
       def allow_edit(from, to)
-        return false unless editable_by?(from)
-        return true if editable_by?(to)
-        share_resource = shared_with.find_by(shared_to: to)
-        if share_resource.nil?
-          share_it(from, to, true)
-        else
-          share_resource.update(edit: true)
-        end
+        from.allow_edit(self, to)
       end
 
       #
@@ -136,42 +142,7 @@ module ShareableModels
       # True if it's ok
       #
       def prevent_edit(from, to)
-        return false unless editable_by?(from)
-        share_resource = shared_with.find_by(shared_to: to)
-        return true if share_resource.nil?
-        share_resource.update(edit: false)
-      end
-
-      private
-
-      #
-      # Check if from and destination models have included the modules
-      #
-      # == Parameters:
-      # resource::
-      #   Instance of resource to share
-      #
-      # == Returns:
-      # Fail if there are a bad condition
-      #
-      def check_resource(resource)
-        fail "#{resource} class must include Shareable module" unless
-          resource.respond_to?(:shareable?)
-      end
-
-      #
-      # Check if given sharer include the correct module in the class.
-      #
-      # == Parameters:
-      # sharer::
-      #   Instance of model to share with
-      #
-      # == Returns:
-      # Fail if the class doesn't include Sharer module
-      #
-      def check_sharer(sharer)
-        fail "#{sharer} class must include Sharer module" unless
-          sharer.respond_to?(:sharer?)
+        from.prevent_edit(self, to)
       end
     end
   end
