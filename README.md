@@ -52,7 +52,7 @@ end
 ```
 
 # Models
-A model can be `sharer` or `shareable`. This methods include some relations and added new methods to your class.
+A model can be `sharer` or `shareable`. This methods include some relations and add new methods to your class.
 
 ## Sharer
 Set a model as sharer. A sharer can share and receive resources. It has edit permissions on a resource if:
