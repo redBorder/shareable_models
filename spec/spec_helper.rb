@@ -1,6 +1,10 @@
 # Base configuration for RSPEC
 ENV['RAILS_ENV'] ||= 'test'
 
+# Code Climate reporter
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 require 'rspec/rails'
 
