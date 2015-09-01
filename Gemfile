@@ -5,5 +5,5 @@ group :development, :test do
   gem 'rails', '~> 4.2.2'
   gem 'pry'
   gem 'pry-nav'
-  gem "codeclimate-test-reporter", require: nil
+  gem 'codeclimate-test-reporter', require: nil
 end
