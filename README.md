@@ -11,7 +11,7 @@ Imagine you have an awesome Rails app for a publisher with three models:
 
 An author can create many private books, but he wants to share it another author. Author class is a `sharer`, it can share and receive books. Books are things that can be shared, so they are `shareable`.
 
-Another author wants to share its book with multiple authors, all of them form a Group. Share a book with all authors in the group can be bored. However, you can set Group `shareable` and share the book with the entire group.
+Another author wants to share its book with multiple authors, all of them form a Group. Share a book with all authors in the group can be bored. However, you can set Group as `sharer` and share the book with the entire group.
 
 Shareable Models use polymorphic relations to allow you to share resources between multiple models with no limitations.
 
